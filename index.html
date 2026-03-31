@@ -10,6 +10,35 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- ============ LOGIN GATE ============ -->
+    <div class="login-gate" id="login-gate">
+        <div class="ambient-bg">
+            <div class="ambient-orb orb-1"></div>
+            <div class="ambient-orb orb-2"></div>
+            <div class="ambient-orb orb-3"></div>
+        </div>
+        <div class="login-box">
+            <div class="login-logo">
+                <div class="logo-icon" style="width:56px;height:56px;">
+                    <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+                </div>
+            </div>
+            <h1 class="login-title">UTRGV Academic Hub</h1>
+            <p class="login-subtitle">Enter your password to continue</p>
+            <form id="login-form" autocomplete="off">
+                <div class="login-input-wrapper">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                    <input type="password" id="login-password" placeholder="Password" autofocus>
+                </div>
+                <div class="login-error" id="login-error"></div>
+                <button type="submit" class="login-btn" id="login-btn">
+                    <span>Unlock Dashboard</span>
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!-- Ambient Background -->
     <div class="ambient-bg">
         <div class="ambient-orb orb-1"></div>

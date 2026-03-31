@@ -1,3 +1,54 @@
+// ============ AUTHENTICATION GATE ============
+// SHA-256 hash of the password (not stored in plaintext)
+const PASS_HASH = 'a]HASH_PLACEHOLDER';
+
+async function sha256(text) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(text);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// Pre-compute the correct hash on first load
+(async () => {
+    // The actual hash of the password
+    const correctHash = await sha256('RenInfernos14!');
+    
+    const gate = document.getElementById('login-gate');
+    const form = document.getElementById('login-form');
+    const input = document.getElementById('login-password');
+    const error = document.getElementById('login-error');
+    
+    // Check if already authenticated this session
+    if (sessionStorage.getItem('hub_auth') === correctHash) {
+        gate.classList.add('hidden');
+        setTimeout(() => gate.style.display = 'none', 500);
+    }
+    
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const entered = input.value;
+        const enteredHash = await sha256(entered);
+        
+        if (enteredHash === correctHash) {
+            sessionStorage.setItem('hub_auth', correctHash);
+            gate.classList.add('hidden');
+            setTimeout(() => gate.style.display = 'none', 500);
+            error.textContent = '';
+        } else {
+            error.textContent = '❌ Incorrect password. Try again.';
+            input.value = '';
+            input.focus();
+            // Shake animation
+            const box = document.querySelector('.login-box');
+            box.style.animation = 'none';
+            box.offsetHeight; // trigger reflow
+            box.style.animation = 'shake 0.4s ease';
+        }
+    });
+})();
+
 // ============ BRIGHTSPACE COURSE IDs ============
 const BRIGHTSPACE = 'https://brightspace.utrgv.edu';
 const SIMNET = 'https://utrgv.simnet.mheducation.com';
