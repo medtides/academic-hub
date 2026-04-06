@@ -58,6 +58,10 @@
                     <div class="logo-subtitle">Spring 2026 • Nicolas Renteria</div>
                 </div>
             </div>
+            <button class="sync-header-btn" id="open-sync-btn" title="Sync Grades">
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+                <span>Sync</span>
+            </button>
             <nav class="nav-tabs">
                 <button class="nav-tab active" data-tab="overview" id="nav-overview">
                     <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
@@ -385,6 +389,79 @@
         </section>
 
     </main>
+
+    <!-- ============ SYNC MODAL ============ -->
+    <div class="sync-overlay" id="sync-overlay">
+        <div class="sync-modal">
+            <div class="sync-header">
+                <h2>
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+                    Grade Sync Center
+                </h2>
+                <button class="sync-close-btn" id="sync-close-btn">&times;</button>
+            </div>
+
+            <div class="sync-steps">
+                <div class="sync-step">
+                    <div class="step-num">1</div>
+                    <div class="step-body">
+                        <strong>Drag the bookmarklet to your bookmarks bar</strong>
+                        <p>This creates a button you can click on any Brightspace grades page.</p>
+                        <div class="bookmarklet-container">
+                            <a class="bookmarklet-link" id="bookmarklet-link" href="#">📥 Grab Grades</a>
+                            <span class="bookmarklet-hint">← Drag this to your bookmarks bar</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sync-step">
+                    <div class="step-num">2</div>
+                    <div class="step-body">
+                        <strong>Go to each course's Grades page on Brightspace</strong>
+                        <p>Open the "My Grades" page for any course, then click the bookmarklet. It will download a JSON file.</p>
+                        <div class="course-links-row">
+                            <a href="https://brightspace.utrgv.edu/d2l/lms/grades/my_grades/main.d2l?ou=44030" target="_blank" class="course-sync-link acct">ACCT 2301</a>
+                            <a href="https://brightspace.utrgv.edu/d2l/lms/grades/my_grades/main.d2l?ou=45730" target="_blank" class="course-sync-link engl">ENGL 1302</a>
+                            <a href="https://brightspace.utrgv.edu" target="_blank" class="course-sync-link qumt">QUMT 2398</a>
+                            <a href="https://utrgv.simnet.mheducation.com" target="_blank" class="course-sync-link infs">INFS 2300 (SIMnet)</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sync-step">
+                    <div class="step-num">3</div>
+                    <div class="step-body">
+                        <strong>Import the downloaded files below</strong>
+                        <p>Select the JSON files the bookmarklet generated. Your grades will update instantly.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sync-import-area">
+                <label class="file-drop-zone" id="file-drop-zone">
+                    <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    <span>Drop JSON files here or <strong>click to browse</strong></span>
+                    <input type="file" id="grade-file-input" multiple accept=".json" style="display:none">
+                </label>
+                <div id="import-status"></div>
+            </div>
+
+            <div class="sync-course-status">
+                <h3>📊 Sync Status</h3>
+                <div class="sync-status-grid" id="sync-status-grid"></div>
+            </div>
+
+            <div class="sync-actions">
+                <button class="sync-action-btn danger" id="reset-grades-btn">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+                    Reset to Defaults
+                </button>
+                <button class="sync-action-btn" id="export-grades-btn">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Export All Data
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script src="app.js"></script>
 </body>
 </html>
